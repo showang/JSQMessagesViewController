@@ -18,6 +18,10 @@
 
 #import "TableViewController.h"
 
+@interface TableViewController()
+@property (nonatomic, strong) DemoMessagesViewController *reusedMessagesViewController;
+@end
+
 @implementation TableViewController
 
 #pragma mark - View lifecycle
@@ -26,6 +30,7 @@
 {
     [super viewDidLoad];
     self.title = @"JSQMessagesViewController";
+    self.reusedMessagesViewController = [DemoMessagesViewController messagesViewController];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -45,6 +50,9 @@
 {
     if (section == 2) {
         return 1;
+    }
+    if (section == 0) {
+        return 3;
     }
     
     return 2;
@@ -66,6 +74,9 @@
                 break;
             case 1:
                 cell.textLabel.text = @"Push programmatically";
+                break;
+            case 2:
+                cell.textLabel.text = @"Push reused programatically";
                 break;
         }
     }
@@ -119,6 +130,12 @@
             case 1:
             {
                 DemoMessagesViewController *vc = [DemoMessagesViewController messagesViewController];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 2:
+            {
+                DemoMessagesViewController *vc = self.reusedMessagesViewController;
                 [self.navigationController pushViewController:vc animated:YES];
             }
                 break;
