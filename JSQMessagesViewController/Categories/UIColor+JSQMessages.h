@@ -54,3 +54,4 @@
 - (UIColor *)jsq_colorByDarkeningColorWithValue:(CGFloat)value;
 
 @end
+
